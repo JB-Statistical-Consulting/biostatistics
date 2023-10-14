@@ -17,8 +17,10 @@
     - The paper accompagnying the R package betareg
   - Kubinec, *Ordered Beta Regression: A Parsimonious, Well-Fitting Model for Continuous Data with Lower and Upper Bounds*, 2021 (https://doi.org/10.1017/pan.2022.20)
     - A paper proposing an alternative to the Zero-One Inflated Beta (ZOIB Model)
-  - Zhang, Qiu & Shi, *simplexreg: An R Package for Regression Analysis of Proportional Data Using the Simplex Distribution*, 2016 (https://doi.org/10.18637/jss.v071.i11)
-    - Simplex Regression, an alternative to beta regression using the Simplex distribution. Incorporates both MLE and GEE techniques.
+  
+### Simplex Regression  
+- Zhang, Qiu & Shi, *simplexreg: An R Package for Regression Analysis of Proportional Data Using the Simplex Distribution*, 2016 (https://doi.org/10.18637/jss.v071.i11)
+  - Simplex Regression, an alternative to beta regression using the Simplex distribution. Incorporates both MLE and GEE techniques.
       
 # Contact
 - Visit www.justinbelair.ca if you have any questions or need help with statistics.
