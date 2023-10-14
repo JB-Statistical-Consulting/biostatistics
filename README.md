@@ -19,3 +19,7 @@
       - A paper proposing an alternative to the Zero-One Inflated Beta (ZOIB Model)
     - Zhang, Qiu & Shi, *simplexreg: An R Package for Regression Analysis of Proportional Data Using the Simplex Distribution*, 2016 (https://doi.org/10.18637/jss.v071.i11)
       - Simplex Regression, an alternative to beta regression using the Simplex distribution. Incorporates both MLE and GEE techniques.
+      
+# Contact
+- Visit www.justinbelair.ca if you have any questions or need help with statistics.
+- ![alt text](https://github.com/JB-Statistical_Consulting/biostatistics/blob/main/contact.png?raw=true)
