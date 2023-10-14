@@ -22,4 +22,5 @@
       
 # Contact
 - Visit www.justinbelair.ca if you have any questions or need help with statistics.
-- ![alt text](https://github.com/JB-Statistical-Consulting/biostatistics/blob/main/contact.png)
+
+![alt text](https://github.com/JB-Statistical-Consulting/biostatistics/blob/main/contact.png)
