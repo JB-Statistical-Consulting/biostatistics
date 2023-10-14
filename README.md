@@ -1,10 +1,9 @@
-# biostatistics
-A free biostatistics reading list :)
+# A free biostatistics reading list :)
 
-## Fisher's classics
+## Fisher's Classics
 - R. A. Fisher, *The Design of Experiments*, 1935 (Book)
 
-  - Contains Fisher's famous lady-tasting tea experiment, first example I know of permutation testing, many groundbreaking examples of Analysis of Variance (ANOVA), and some disparaging remarks towards Pearson.
+  - Contains Fisher's famous lady-tasting tea experiment, first example I know of permutation testing, many groundbreaking examples of Analysis of Variance (ANOVA), and some disparaging (and very funny) remarks towards Pearson.
 
 ## Modeling proportions data (in the 0-1 interval)
 - Beta regression
