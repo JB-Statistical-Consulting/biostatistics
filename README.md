@@ -1,6 +1,10 @@
 # A free biostatistics reading list :)
 
-## Fisher's Classics
+## Foundational Questions
+-  Perezgonzalez, Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing, 2015 (https://doi.org/10.3389/fpsyg.2015.00223)
+  - An interesting overview of the two foundational classical approaches to testing in statistics: Fisher's approach and the Neyman-Pearson framework. The third approach, Null Hypothesis Significance Testing (NHST) is presented as a loose and controversial approach lacking rigour. A must read!
+
+## Classics
 - R. A. Fisher, *The Design of Experiments*, 1935 (Book)
 
   - Contains Fisher's famous lady-tasting tea experiment, first example I know of permutation testing, many groundbreaking examples of Analysis of Variance (ANOVA), and some disparaging (and very funny) remarks towards Pearson.
