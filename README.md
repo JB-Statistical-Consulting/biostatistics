@@ -15,7 +15,7 @@
   - Judea Pearl, Causality : Models, Reasoning and Inference, 2000, updated in 2009 (Book)
     - A true masterpiece. A technical and deep exposition of Pearl's life work on Directed Acyclic Graphs (DAGs) as Structural Causal Models (SCMs) that got me started on my causal inference journey. His viewpoint is an alternative to the Neyman-Rubin causal model based on potential outcomes. This book can also be seen as the academic version of The Book of Why, a famous general-audience book on causality.
     
-  - Guido W. Imbend and Donald B. Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, 2015 (Book)
+  - Guido W. Imbens and Donald B. Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences, 2015 (Book)
     - A true masterpiece. The most achieved and thorough exposition of the Neyman-Rubin causal model based on potential outcomes. It is an alternative to Pearl's DAG and SCM framework (see above). A beautiful book that I find myself going back to often, for its depth and breadth of insights into thinking about causal inference. Imbens is an economist who contributed much to this field, most notably through is Local-Average Treatment Effect identification in cases of non-compliance. Rubin is one of the greatest living statisticians.
 
 ## Modeling proportions data (in the 0-1 interval)
