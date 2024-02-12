@@ -7,7 +7,7 @@
   - John M. Hoenig & Dennis M. Heisey, The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis, 2001 (https://doi.org/10.1198/000313001300339897)
 
 ## Philosophical Questions
-- [Jose D. Perezgonzalez, *Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing*, 2015] (https://doi.org/10.3389/fpsyg.2015.00223)
+- [Jose D. Perezgonzalez, *Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing*, 2015](https://doi.org/10.3389/fpsyg.2015.00223)
   - An interesting overview of the two foundational classical approaches to testing in statistics: Fisher's approach and the Neyman-Pearson framework. The third approach, Null Hypothesis Significance Testing (NHST) is presented as a loose and controversial approach lacking rigour. A must read!
 
 ## Classics
@@ -16,7 +16,7 @@
   - Contains Fisher's famous lady-tasting tea experiment, first example I know of permutation testing, many groundbreaking examples of Analysis of Variance (ANOVA), and some disparaging (and very funny) remarks towards Pearson.
   
 ## Missing Data
-- Stef van Buuren, *Flexible Imputation of Missing Data*, 2018 (Book with [online version] (https://stefvanbuuren.name/fimd/))
+- Stef van Buuren, *Flexible Imputation of Missing Data*, 2018 (Book with [online version](https://stefvanbuuren.name/fimd/))
 
 ## Causal Inference
 
