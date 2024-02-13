@@ -20,7 +20,7 @@
   - A must-have for any applied statistician dealing with missing data problems. This book presents the state-of-the-art in multiple imputation (MI), a field where van Buuren made his name. Contains lots of concrete examples with code, discusses trade-offs in complex situations, and gives lots of references to literature with simulation studies to back any claims up.
   
 - Gert Molenberghs and Michael G. Kenward, *Missing Data in Clinical Studies*, 2007 (Book)
-  - A deep and thorough exposition of missing data in clinical studies. A complex book for advanced statisticians, especially working in clinical studies.
+  - A deep and thorough exposition of missing data in clinical studies. A complex book for advanced statisticians, especially those working in clinical studies.
   
 - Roderick J. A. Little & Donald B. Rubin, *Statistical Analysis with Missing Data*, 2002 (Book)
   - The first textbook put together to reflect the growing literature on missing data methodology. Still useful, although van Buuren, 2018 is probably better suited for applied statisticians
