@@ -1,5 +1,7 @@
 # A free biostatistics reading list :)
 
+- Visit [www.justinbelair.ca](https://www.justinbelair.ca/?utm_source=GitHub&utm_medium=reading_list&utm_campaign=header) if you have any questions or need help with statistics.
+
 ## Fundamentals
 
 - Misinterpretations of p-values, power analysis, and other concepts
@@ -58,6 +60,6 @@
   - Simplex Regression, an alternative to beta regression using the Simplex distribution. Incorporates both MLE and GEE techniques.
       
 # Contact
-- Visit www.justinbelair.ca if you have any questions or need help with statistics.
+- Visit [www.justinbelair.ca](https://www.justinbelair.ca/?utm_source=GitHub&utm_medium=reading_list&utm_campaign=footer) if you have any questions or need help with statistics.
 
 ![alt text](https://github.com/JB-Statistical-Consulting/biostatistics/blob/main/contact.png)
