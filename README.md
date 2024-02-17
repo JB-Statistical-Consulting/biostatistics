@@ -55,7 +55,7 @@ When building prediction models, we are less interested about inference on the p
 - [Riley et al., Evaluation of clinical prediction models (part 2): how to undertake an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074820)
   - Part 2 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on conducting external validation of the model built following the steps outlined in part 1.
   
-- [Riley et al., Evaluation of clinical prediction models (part 3): calculating the sample size required for an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074820)
+- [Riley et al., Evaluation of clinical prediction models (part 3): calculating the sample size required for an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074821)
   - Part 3 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on power and sample size calculations. It is often difficult to know the sample-size required for adequate external validation data. This guide offers detailed instructions on conducting these estimations, once we've built a model.  
 
 ## Modeling proportions data (in the 0-1 interval)
