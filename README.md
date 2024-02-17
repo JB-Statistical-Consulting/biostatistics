@@ -42,6 +42,22 @@
 - Bill Shipley, *Cause and Correlation in Biology : A User's Guide to Path Analysis, Structural Equations and Causal Inference*, 2000 (Book)
   - A well-written introduction to causal inference for biologists, with an emphasis of Structural Equation Models (SEMs) and Path Analysis. There is also a little bit of interesting history sprinkled in. I took a class with this professor (who just retired from a University close to my home town) in 2023 and his focus on biological applications without sacrificing rigour is great for any non-statistician looking to tackle complex statistical methods!
 
+## Clinical Prediction Modelling
+
+When building prediction models, we are less interested about inference on the parameters and more focused on the values and uncertainty of the predictions. In clinical settings, robust prediction models can mean the difference between life and death!
+
+- [Ewout W. Steyerberg, Clinical Prediction Models, 2010 (Book, with online content)](https://www.clinicalpredictionmodels.org/)
+  - A pretty thick reference manual by a leader in the field. Aimed especially towards prediction models in clinical settings, it's a must-have for any advanced modeller looking to make a difference in healthcare with novel technologies.
+  
+- [Collins et al., Evaluation of clinical prediction models (part 1): from development to external validation, 2024](https://doi.org/10.1136/bmj-2023-074819)
+  - Part 1 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on the early stages of model-building.
+  
+- [Riley et al., Evaluation of clinical prediction models (part 2): how to undertake an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074820)
+  - Part 2 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on conducting external validation of the model built following the steps outlined in part 1.
+  
+- [Riley et al., Evaluation of clinical prediction models (part 3): calculating the sample size required for an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074820)
+  - Part 3 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on power and sample size calculations. It is often difficult to know the sample-size required for adequate external validation data. This guide offers detailed instructions on conducting these estimations, once we've built a model.  
+
 ## Modeling proportions data (in the 0-1 interval)
 ### Beta regression
 
