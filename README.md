@@ -57,6 +57,29 @@ When building prediction models, we are less interested about inference on the p
   
 - [Riley et al., Evaluation of clinical prediction models (part 3): calculating the sample size required for an external validation study, 2024](https://doi.org/10.1136/bmj-2023-074821)
   - Part 3 of a step-by-step tutorial on rigorous and robust clinical prediction model-building, focused on power and sample size calculations. It is often difficult to know the sample-size required for adequate external validation data. This guide offers detailed instructions on conducting these estimations, once we've built a model.  
+  
+## Epidemiology
+
+### Fundamentals
+
+- Kenneth J. Rothman & Sander Greenland, Second Edition, 1998 (Book)
+  - The bible of modern epidemiology. An authoritative textbook on study design principles. Its sections on analysis techniques are a bit dated. Also, it doesn't discuss much of the causal inference techniques and principles that have come to slowly dominate the field through the works of VanderWeele, Hernàn, Robins and others. Still, anybody wishing to understand how to think like an epidemiologist must tackle this book. Its explanation of case-control studies and their peculiarities is particularly illuminating. 
+  
+- Leon Gordis, Epidemiology, Fifth Edition, 2014 (Book)
+  - A very popular introduction to Epidemiology in color with many images and illustrations. A good tool to learn the basics of epidemiological design principles.
+  
+### Bradford Hill Criteria And Their Legacy
+
+In 1965, Bradford Hill proposed a series of 9 criteria which should be thought about when trying to uncover a causal relationship among the correlational noise. Causal inference has a gone a long way since, but these 9 criteria are still widely discussed and serve as guiding principles in epidemiology and its subfields.
+
+- [Sir Austin Bradford Hill, The Environment and Disease: Association or Causation?, 1965](https://doi.org/10.1177/003591576505800503)
+  - The classic President's Address delivered to newly formed Section of Occupational Medicine of the Royal Society of Medicine by Sir Bradford Hill in which he presents his famous 9 criteria for an association to be deemed causal. The paper went on to become tremendously influential and its still commented to this day.
+  
+- [Glass, Goodman, Hernan & Samet, Causal Inference in Public Health, 2013](https://doi.org/10.1146/annurev-publhealth-031811-124606)
+  - A modern discussion of causal inference through the lens of policymaking in public health areas.
+  
+- [Fedak et al., Applying the Bradford Hill criteria in the 21st century: how data integration has changed causal inference in molecular epidemiology, 2015](https://doi.org/10.1186%2Fs12982-015-0037-4)
+  - Discusses how our understanding of Bradford Hill's original 9 criteria has evolve over time through a review of examples taken from molecular epidemiology.
 
 ## Modeling proportions data (in the 0-1 interval)
 ### Beta regression
