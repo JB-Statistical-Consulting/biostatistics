@@ -62,7 +62,10 @@ When building prediction models, we are less interested about inference on the p
 
 ### Fundamentals
 
-- Kenneth J. Rothman & Sander Greenland, Second Edition, 1998 (Book)
+Epidemiology is a discipline distinct from biostatistics, but there is strong overlap in the methods.
+Epidemiology relies on many difficult design principles to obtain valid inferences. A few textbooks that are must-haves for epidemiologists.
+
+- Kenneth J. Rothman & Sander Greenland, Modern Epidemiology, Second Edition, 1998 (Book)
   - The bible of modern epidemiology. An authoritative textbook on study design principles. Its sections on analysis techniques are a bit dated. Also, it doesn't discuss much of the causal inference techniques and principles that have come to slowly dominate the field through the works of VanderWeele, Hernàn, Robins and others. Still, anybody wishing to understand how to think like an epidemiologist must tackle this book. Its explanation of case-control studies and their peculiarities is particularly illuminating. 
   
 - Leon Gordis, Epidemiology, Fifth Edition, 2014 (Book)
