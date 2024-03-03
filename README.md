@@ -4,15 +4,27 @@
 
 ## Fundamentals
 
-- Misinterpretations of p-values, power analysis, and other concepts
-  - [Sander Greenland, Nonsignificance Plus High Power Does Not Imply Supper for the Null Over the Alternative, 2012](https://doi.org/10.1016/j.annepidem.2012.02.007)
-  - [John M. Hoenig & Dennis M. Heisey, The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis, 2001](https://doi.org/10.1198/000313001300339897)
+### Hypothesis Testing
 
-## Philosophical Questions
+- [Huang et al., Formulating Appropriate Statistical Hypotheses for Treatment Comparison in Clinical Trial Design and Analysis, 2014](https://doi.org/10.1016%2Fj.cct.2014.09.005)
+  - This paper is quite technical, but truly amazing! Anybody with a background in pure statistics should read this paper to widen their theoretical understanding of designing hypotheses tests to be applied in research settings. I can't recommend this paper enough!
+
+- [Delacre, Lakens & Leys, Why Psychologists Should by Default Use Welch's t-test Instead of Student's t-test, 2017](https://doi.org/10.5334/irsp.82)
+  - A must-read! Take-home message : t-test is great, especially its robust forms!
+  
+- [Lakens et al., Equivalence Testing for Psychological Research: A Tutorial, 2018](https://doi.org/10.1177/2515245918770963)
+  - A great gentle introduction to minimal-effects testing, equivalence testing, and inferiority testing. These are underutilized tools that should be taught to any applied researchers using hypothesis tests for experimental data! A must read.
+  - Related to this paper is an R package called TOSTER, developed by Lakens and others. Check out the [package vignette here](https://cran.rstudio.com/web/packages/TOSTER/vignettes/IntroductionToTOSTER.html)
+
+### Misinterpretations of p-values, power analysis, and other concepts
+- [Sander Greenland, Nonsignificance Plus High Power Does Not Imply Supper for the Null Over the Alternative, 2012](https://doi.org/10.1016/j.annepidem.2012.02.007)
+- [John M. Hoenig & Dennis M. Heisey, The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis, 2001](https://doi.org/10.1198/000313001300339897)
+
+### Philosophical Questions
 - [Jose D. Perezgonzalez, *Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing*, 2015](https://doi.org/10.3389/fpsyg.2015.00223)
   - An interesting overview of the two foundational classical approaches to testing in statistics: Fisher's approach and the Neyman-Pearson framework. The third approach, Null Hypothesis Significance Testing (NHST) is presented as a loose and controversial approach lacking rigour. A must read!
 
-## Classics
+### Classics
 - R. A. Fisher, *The Design of Experiments*, 1935 (Book)
 
   - Contains Fisher's famous lady-tasting tea experiment, first example I know of permutation testing, many groundbreaking examples of Analysis of Variance (ANOVA), and some disparaging (and very funny) remarks towards Pearson.
