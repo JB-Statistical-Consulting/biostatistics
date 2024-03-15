@@ -17,8 +17,16 @@
   - Related to this paper is an R package called TOSTER, developed by Lakens and others. Check out the [package vignette here](https://cran.rstudio.com/web/packages/TOSTER/vignettes/IntroductionToTOSTER.html)
 
 ### Misinterpretations of p-values, power analysis, and other concepts
+- [Sander Greenland et al., Statistical tests, P values, confidence intervals, and power: a guide to misinterprations, 2016](https://doi.org/10.1007%2Fs10654-016-0149-3)
+  - THE resource for all p-value misinterpretations by a collection of eminent statisticians. Must be read and re-read!
 - [Sander Greenland, Nonsignificance Plus High Power Does Not Imply Supper for the Null Over the Alternative, 2012](https://doi.org/10.1016/j.annepidem.2012.02.007)
+  - The title says it all...it's an easy mistake to make!
 - [John M. Hoenig & Dennis M. Heisey, The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis, 2001](https://doi.org/10.1198/000313001300339897)
+  - Power is a widely misunderstood statistical concept. Study it!
+- [Steven Goodman, A Dirty Dozen: Twelve P-Value Misconceptions, 2008](https://doi.org/10.1053/j.seminhematol.2008.04.003)
+  - The title says it all.
+- [Harvey J. Motulsky, Common misconceptions about data analysis and statistics, 2014](https://doi.org/10.1007%2Fs00210-014-1037-6)
+  - Goes over many misconceptions. It is quite beginner friendly, take a look!
 
 ### Lord's Paradox
 - [Frederic M. Lord, A Paradox in the Interpretation of Group Comparisons, 1967](https://psycnet.apa.org/doi/10.1037/h0025105)
