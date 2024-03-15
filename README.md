@@ -20,6 +20,14 @@
 - [Sander Greenland, Nonsignificance Plus High Power Does Not Imply Supper for the Null Over the Alternative, 2012](https://doi.org/10.1016/j.annepidem.2012.02.007)
 - [John M. Hoenig & Dennis M. Heisey, The Abuse of Power: The Pervasive Fallacy of Power Calculations for Data Analysis, 2001](https://doi.org/10.1198/000313001300339897)
 
+### Lord's Paradox
+- [Frederic M. Lord, A Paradox in the Interpretation of Group Comparisons, 1967](https://psycnet.apa.org/doi/10.1037/h0025105)
+  - The first very influential paper describing what is now known as Lord's Paradox.
+- [Frederic M. Lord, Statistical Adjustments When Comparing Preexisting Groups, 1969](https://psycnet.apa.org/doi/10.1037/h0028108)
+  - Lord's second paper that goes into more details on his 'paradox'
+- [Judea Pearl, Lord's Paradox Revisited - (Oh Lord! Kumbaya!), 2016](https://doi.org/10.1515/jci-2016-0021)
+  - A causal inference perspective by one of its main contributors, Judea Pearl. (See Causal Inference section of this reading list)
+
 ### Philosophical Questions
 - [Jose D. Perezgonzalez, *Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing*, 2015](https://doi.org/10.3389/fpsyg.2015.00223)
   - An interesting overview of the two foundational classical approaches to testing in statistics: Fisher's approach and the Neyman-Pearson framework. The third approach, Null Hypothesis Significance Testing (NHST) is presented as a loose and controversial approach lacking rigour. A must read!
