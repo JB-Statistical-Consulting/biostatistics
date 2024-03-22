@@ -27,6 +27,17 @@
   - The title says it all.
 - [Harvey J. Motulsky, Common misconceptions about data analysis and statistics, 2014](https://doi.org/10.1007%2Fs00210-014-1037-6)
   - Goes over many misconceptions. It is quite beginner friendly, take a look!
+  
+### Design of Experiments
+
+- B.J. Winer, Donald R. Brown, Kenneth M. Michels, Statistical Principles in Experimental Design, Third edition, 1991 (Book)
+  - A very thick book that thoroughly covers a wide-array of experimental designs. A great reference manual for anyone working on experimental research, espcially with human-subjects (e.g. psychology)
+
+- [Leducq et al., Research Techniques Made Simple : Randomized Controlled Trials for Topical Drugs in Dermatology: When and How Should We Use a Within-Person Design?, 2020](https://doi.org/10.1016/j.jid.2020.03.945)
+  - A great introduction to the within-person (aka within-patient, within-subject) randomized controlled trial. This type of trial is used when it is possible to use a patient as its own control (e.g. in ophthalmology, where each eye can be randomized to a different treatment).
+
+- [Pandis et al., CONSORT 2010 statement: extension checklist for reporting within person randomised trials, 2017](https://doi.org/10.1136/bmj.j2835)
+  - Anyone running a within-person trial should consult these guidelines for maximizing the utility of what they report from the trial!
 
 ### Lord's Paradox
 - [Frederic M. Lord, A Paradox in the Interpretation of Group Comparisons, 1967](https://psycnet.apa.org/doi/10.1037/h0025105)
