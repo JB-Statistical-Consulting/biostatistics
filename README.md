@@ -129,7 +129,7 @@ In 1965, Bradford Hill proposed a series of 9 criteria which should be thought a
 
 - [Zeger, A regression model for time series of counts, 1988](https://doi.org/10.2307/2336303)
   - A classic paper discussing the problem of modelling time series of counts, with the famous example of U.S. Polio incidence data, now part of the `glarma` package.
-- [Davis, Wang & Dunsmuir, Modeling Time Series of Count Data, 1999. In S Ghosh (ed.), *Asymptotics, Nonparametrics, and Time Series*, volume 158 of *Statistics Textbooks and Monographs, pp. 63-114](https://doi.org/10.1201/9781482269772)
+- [Davis, Wang & Dunsmuir, Modeling Time Series of Count Data, 1999. In S Ghosh (ed.), *Asymptotics, Nonparametrics, and Time Series*, volume 158 of *Statistics Textbooks and Monographs*, pp. 63-114](https://doi.org/10.1201/9781482269772)
   - A theoretical paper discussing differences between parameter-driven and observation-driven state-space models, with many example analyses at the end.
 - [Davis, Dunsmuir and Streett, Observation-driven models for Poisson counts, 2003](https://doi.org/10.1093/biomet/90.4.777)
   - A theoretical paper with an interesting example application to the Asthma dataset.
