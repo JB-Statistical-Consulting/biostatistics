@@ -123,6 +123,19 @@ In 1965, Bradford Hill proposed a series of 9 criteria which should be thought a
 - [Fedak et al., Applying the Bradford Hill criteria in the 21st century: how data integration has changed causal inference in molecular epidemiology, 2015](https://doi.org/10.1186%2Fs12982-015-0037-4)
   - Discusses how our understanding of Bradford Hill's original 9 criteria has evolve over time through a review of examples taken from molecular epidemiology.
 
+## Time-series Models
+
+### Generalized Linear Autoregressive Moving Average (GLARMA) Models for Count Data (Poisson, Binomial, Negative Binomial)
+
+- [Zeger, A regression model for time series of counts, 1988](https://doi.org/10.2307/2336303)
+  - A classic paper discussing the problem of modelling time series of counts, with the famous example of U.S. Polio incidence data, now part of the `glarma` package.
+- [Davis, Wang & Dunsmuir, Modeling Time Series of Count Data, 1999. In S Ghosh (ed.), *Asymptotics, Nonparametrics, and Time Series*, volume 158 of *Statistics Textbooks and Monographs, pp. 63-114](https://doi.org/10.1201/9781482269772)
+  - A theoretical paper discussing differences between parameter-driven and observation-driven state-space models, with many example analyses at the end.
+- [Davis, Dunsmuir and Streett, Observation-driven models for Poisson counts, 2003](https://doi.org/10.1093/biomet/90.4.777)
+  - A theoretical paper with an interesting example application to the Asthma dataset.
+- [Dunsmuir & Scott, The `glarma` Package for Observation Driven Time Series Regression of Counts, 2015](https://doi.org/10.18637/jss.v067.i07)
+  - The `glarma` package vignette with theory, code, and examples.
+
 ## Modeling proportions data (in the 0-1 interval)
 ### Beta regression
 
