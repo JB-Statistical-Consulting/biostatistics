@@ -140,7 +140,7 @@ In 1965, Bradford Hill proposed a series of 9 criteria which should be thought a
 ### Proportional Odds Regression AKA Ordinal Regression AKA many other names
 
 - [Rune Haubo B Christensen, Cumulative Link Models for Ordinal Regression with the `R` Package `ordinal`, 2018](https://cran.r-project.org/web/packages/ordinal/vignettes/clm_article.pdf)
- - The `ordinal` package vignette with theory, code, and examples. It's rather lengthy and extensive!
+  - The `ordinal` package vignette with theory, code, and examples. It's rather lengthy and extensive!
 
 - [Peter McCulagh, Regression Models for Ordinal Data, 1980](https://doi.org/10.1111/j.2517-6161.1980.tb01109.x)
   - A foundational paper for the proportional odds model, relating it mathematically to the famoux Cox proportional hazards model.
