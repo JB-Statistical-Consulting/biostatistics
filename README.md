@@ -136,6 +136,22 @@ In 1965, Bradford Hill proposed a series of 9 criteria which should be thought a
 - [Dunsmuir & Scott, The `glarma` Package for Observation Driven Time Series Regression of Counts, 2015](https://doi.org/10.18637/jss.v067.i07)
   - The `glarma` package vignette with theory, code, and examples.
 
+## Modeling ordinal data
+### Proportional Odds Regression AKA Ordinal Regression AKA many other names
+
+- [Rune Haubo B Christensen, Cumulative Link Models for Ordinal Regression with the `R` Package `ordinal`, 2018](https://cran.r-project.org/web/packages/ordinal/vignettes/clm_article.pdf)
+ - The `ordinal` package vignette with theory, code, and examples. It's rather lengthy and extensive!
+
+- [Peter McCulagh, Regression Models for Ordinal Data, 1980](https://doi.org/10.1111/j.2517-6161.1980.tb01109.x)
+  - A foundational paper for the proportional odds model, relating it mathematically to the famoux Cox proportional hazards model.
+  
+- [Christopher Winship & Robert D. Mare, Regression Models With Ordinal Variables, 1984](https://doi.org/10.2307/2095465)
+  - A foundational paper describing techniques to handle ordinal data especially aimed at eliminating bad practices in the sociology literature.
+  
+- [UCLA: Statistical Consulting Group., Ordinal Logistic Regression | R Data Analysis Examples, Accessed April 12, 2024](https://stats.oarc.ucla.edu/r/dae/ordinal-logistic-regression/)
+  - A tutorial for ordinal logistic regression using `MASS` package. No matter if you use this package or `clm`, this tutorial is interesting as it addresses how to analyze the data before modeling, namely by checking the proportional odds assumption.
+
+
 ## Modeling proportions data (in the 0-1 interval)
 ### Beta regression
 
