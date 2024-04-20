@@ -46,6 +46,17 @@
   - Lord's second paper that goes into more details on his 'paradox'
 - [Judea Pearl, Lord's Paradox Revisited - (Oh Lord! Kumbaya!), 2016](https://doi.org/10.1515/jci-2016-0021)
   - A causal inference perspective by one of its main contributors, Judea Pearl. (See Causal Inference section of this reading list)
+  
+### Survey Sampling
+
+- [W.G Cochran, The Use of the Analysis of Variance In Enumeration By Sampling, 1938](https://doi.org/10.2307/2279483)
+  - A landmark paper on survey sampling where the idea to use ANOVA to estimate properties of the sampling design. Cochran also mentions the idea of an infinite population in relation to sampling theory.
+  
+- [V.P. Godambe and M.E. Thompson, Parameters of Superpopulation and Survey Population: Their Relationships and Estimation, 1986](https://doi.org/10.2307/1403139)
+  - A highly technical paper on the use of estimating functions to relate superpopulation parameters with those of a survey population under study.
+  
+- [J.N.K. Rao, Interplay Between Sample Survey Theory and Practice : An Appraisal, 2005](https://www150.statcan.gc.ca/n1/en/catalogue/11-522-X20050019443)
+  - A thorough historical overview of the evolution of survey sampling theory through the interplay between theory and practice.
 
 ### Philosophical Questions
 - [Jose D. Perezgonzalez, *Fisher, Neyman-Pearson or NHST? A tutorial for teaching data testing*, 2015](https://doi.org/10.3389/fpsyg.2015.00223)
