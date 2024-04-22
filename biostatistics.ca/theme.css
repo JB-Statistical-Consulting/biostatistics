@@ -1,0 +1,44 @@
+.main-container { 
+     max-width: 1080px !important;
+	font-color: #000000 !important;
+	background-color: #FFFFFF !important;
+} 
+
+body, p, em, strong, ul li, ol li {
+  background-color: #FFFFFF !important;
+  color:#000000  !important;
+font-size = 12 !important;
+}
+
+h1 {
+  font-size: 20px !important;
+  color:  #ff79c6 !important;
+  font-weight: bold !important;	
+}
+
+
+h2 {
+  font-size: 16px !important;
+  color:  #ff79c6 !important;
+}
+
+h3 {
+  font-size: 14px !important;
+  color:  #ff79c6 !important;
+}
+
+.math, .inlineMath {
+    color: #000000 !important;
+}
+
+.rcode{
+background-color: #f8f8f2 !important;
+color:  	#000000 !important;
+font-size: 11px !important;
+  border: 3px solid #bd93f9;
+  font-weight: bold;
+}
+
+ hr {
+     page-break-after: always !important;
+ }
