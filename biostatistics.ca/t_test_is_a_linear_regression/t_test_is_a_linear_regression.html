@@ -380,21 +380,21 @@ distribution we would expect if the null hypothesis were true.</li>
 t-test and linear regression are related.</p>
 <p>First, we simulate a binary vector specifying two groups, 0 and
 1.</p>
-<pre class="r"><code>set.seed(1) #for reproducibility
+<pre class="r rcode"><code>set.seed(1) #for reproducibility
 
 n &lt;- 20 # sample size
 
 groups &lt;- rbinom(n, 1, 0.5) #Binary variable for groups with equal probability
 groups</code></pre>
-<pre><code>##  [1] 0 0 1 1 0 1 1 1 1 0 0 0 1 0 1 0 1 1 0 1</code></pre>
+<pre class="rcode"><code>##  [1] 0 0 1 1 0 1 1 1 1 0 0 0 1 0 1 0 1 1 0 1</code></pre>
 <p>We simulate <span class="math inline">\(y\)</span> as a function of
 groups : observations in groups 1 will have a different mean. We also
 add some noise with <code>rnorm</code>. Here, this is a case where both
 groups, for example treatment vs placebo, would have different
 means.</p>
-<pre class="r"><code>y &lt;- 2*groups + rnorm(n,0,1)
+<pre class="r rcode"><code>y &lt;- 2*groups + rnorm(n,0,1)
 y</code></pre>
-<pre><code>##  [1]  1.51178117  0.38984324  1.37875942 -0.21469989  1.12493092  1.95506639
+<pre class="rcode"><code>##  [1]  1.51178117  0.38984324  1.37875942 -0.21469989  1.12493092  1.95506639
 ##  [7]  1.98380974  2.94383621  2.82122120  0.59390132  0.91897737  0.78213630
 ## [13]  2.07456498 -1.98935170  2.61982575 -0.05612874  1.84420449  0.52924762
 ## [19] -0.47815006  2.41794156</code></pre>
@@ -404,11 +404,11 @@ variable…</h3>
 <p>We fit a linear model of <span class="math inline">\(y\)</span> as a
 function of <code>groups</code> and look at the model summary and the
 confidence interval for the regression parameter.</p>
-<pre class="r"><code>lm.groups &lt;- lm(y ~ groups)
+<pre class="r rcode"><code>lm.groups &lt;- lm(y ~ groups)
 
 #Notice the t-statistic of 3.407
 summary(lm.groups)</code></pre>
-<pre><code>## 
+<pre class="rcode"><code>## 
 ## Call:
 ## lm(formula = y ~ groups)
 ## 
@@ -426,21 +426,21 @@ summary(lm.groups)</code></pre>
 ## Residual standard error: 1.005 on 18 degrees of freedom
 ## Multiple R-squared:  0.392,  Adjusted R-squared:  0.3582 
 ## F-statistic: 11.61 on 1 and 18 DF,  p-value: 0.003145</code></pre>
-<pre class="r"><code>#The two-sided 95% confidence interval for the regression parameter
+<pre class="r rcode"><code>#The two-sided 95% confidence interval for the regression parameter
 confint(lm.groups, &#39;groups&#39;, level=0.95)</code></pre>
-<pre><code>##            2.5 %   97.5 %
+<pre class="rcode"><code>##            2.5 %   97.5 %
 ## groups 0.5900617 2.488861</code></pre>
 </div>
 <div id="is-the-same-as-running-a-t-test" class="section level3">
 <h3>… is the same as running a t-test!</h3>
 <p>Alternatively, we separate the <span class="math inline">\(y\)</span>
 values in two groups and run a t-test<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<pre class="r"><code>group0_values &lt;- y[groups==0]
+<pre class="r rcode"><code>group0_values &lt;- y[groups==0]
 group1_values &lt;- y[groups==1]
 
 
 t.test(group1_values, group0_values,var.equal=T)</code></pre>
-<pre><code>## 
+<pre class="rcode"><code>## 
 ##  Two Sample t-test
 ## 
 ## data:  group1_values and group0_values

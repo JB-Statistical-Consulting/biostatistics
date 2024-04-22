@@ -13,7 +13,9 @@ output:
       - \newcommand{\training}{\mathcal{X} \times \mathcal{Y}}
       - \newcommand{\defeq}{:=}
 ---
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, class.source = "rcode", class.output = "rcode")
+```
 
 By Justin Bélair &copy; | Biostatistician at [JB Statistical Consulting](www.justinbelair.ca)
 
