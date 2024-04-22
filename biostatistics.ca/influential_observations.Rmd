@@ -4,7 +4,7 @@ date: \today
 author:
 output:
   html_document:
-    css: "C:/Users/belai/Documents/JBConsulting/GitHub/Content/power/theme.css"
+    css: "C:/Users/belai/Documents/JBConsulting/GitHub/biostatistics/biostatistics.ca/theme.css"
     #toc: TRUE
     #toc_float : TRUE
     #toc_depth : 2
@@ -14,9 +14,9 @@ output:
       - \newcommand{\defeq}{:=}
 ---
 
-By Justin Bélair | Biostatistician at JB Statistical Consulting
+By Justin Bélair &copy; | Biostatistician at [JB Statistical Consulting](www.justinbelair.ca)
 
-[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics)
+[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
 
 ![](C:/Users/belai/Documents/JBConsulting/GitHub/Content/Justin-35(1).jpg){height=50%}
 
