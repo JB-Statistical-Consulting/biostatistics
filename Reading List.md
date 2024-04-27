@@ -86,11 +86,17 @@
 - Guido W. Imbens and Donald B. Rubin, *Causal Inference for Statistics, Social, and Biomedical Sciences*, 2015 (Book)
   - A true masterpiece. The most achieved and thorough exposition of the Neyman-Rubin causal model based on potential outcomes. It is an alternative to Pearl's DAG and SCM framework (see above). A beautiful book that I find myself going back to often, for its depth and breadth of insights into thinking about causal inference. Imbens is an economist who contributed much to this field, most notably through is Local-Average Treatment Effect identification in cases of non-compliance. Rubin is one of the greatest living statisticians.
   
-- Judea Pearl, Madelyn Glymour & Nicholas P. Jewell, *Causal Inference in Statistics : A Primer*, 2016
+- Judea Pearl, Madelyn Glymour & Nicholas P. Jewell, *Causal Inference in Statistics : A Primer*, 2016 (Book)
   - A gentle introduction to Directed Acyclic Graphs (DAGs) and Structural Causal Models (SCMs) at about the undergraduate in statistics level.
   
 - Bill Shipley, *Cause and Correlation in Biology : A User's Guide to Path Analysis, Structural Equations and Causal Inference*, 2000 (Book)
   - A well-written introduction to causal inference for biologists, with an emphasis of Structural Equation Models (SEMs) and Path Analysis. There is also a little bit of interesting history sprinkled in. I took a class with this professor (who just retired from a University close to my home town) in 2023 and his focus on biological applications without sacrificing rigour is great for any non-statistician looking to tackle complex statistical methods!
+  
+- Paul R. Rosenbaum, *Observational Studies*, 1995 (Book)
+  - A compact monograph by one of the inventors of the propensity score (PS) with a clear writing style. I've always enjoyed Rosenbaum's incisive perspectives on problems related to causality in observational studies!
+  
+- Tyler J. VanderWeele, *Explanations in Causal Inference : Methods for Mediation and Interaction*, 2015 (Book)
+  - A thick, somewhat terse book by the leading researcher in mediation and interaction analysis in causal inference. This book is aimed at advanced users of causal inference methods, but it is truly unique in its depth of the subject! It is written by an epidemiologist but he also targets a social science audience.
 
 ## Clinical Prediction Modelling
 
