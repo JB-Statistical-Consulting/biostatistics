@@ -1,0 +1,81 @@
+---
+title: Using `pool()` for multiple imputation in `mice` package
+date: \today
+author:
+output:
+  html_document:
+    css: "C:/Users/belai/Documents/JBConsulting/GitHub/biostatistics/biostatistics.ca/theme.css"
+    #toc: TRUE
+    #toc_float : TRUE
+    #toc_depth : 2
+    header_includes:
+      - \usepackage{amsmath, amssymb, amsthm, mathtools}
+      - \newcommand{\training}{\mathcal{X} \times \mathcal{Y}}
+      - \newcommand{\defeq}{:=}
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, class.source = "rcode", class.output = "rcode")
+```
+
+By Justin Bélair &copy; | Biostatistician at [JB Statistical Consulting](www.justinbelair.ca)
+
+[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
+
+![](C:/Users/belai/Documents/JBConsulting/GitHub/biostatistics/biostatistics.ca/Justin-35(1).jpg){height=50%}
+
+\newpage
+
+# Multiple Imputation
+
+Multiple Imputation (MI) is the cutting-edge statistical approach to dealing with missing data. Unfortunately, many often forego this technique because it requires substantial statistical and programming knowledge.
+
+We'll show you that it need not be complicated for most of the analyses.
+
+
+## Example 
+
+We load our data and see there are missing values.
+
+```{r, include = FALSE}
+library(mice)
+library(dplyr)
+```
+
+
+```{r}
+# We look at our data
+
+data.analysis <- read.csv("toy_data_binary_outcome_w_miss.csv")
+
+str(data.analysis)
+
+```
+
+We are interested in estimating the effect of the Exposure on the **Binary_Outcome** variable, adjusted for **Age**, **Gender** and **Education**. We choose the logistic regression model.
+
+```{r}
+glm(Binary_Outcome ~ Exposure + Age + Gender + Education, data = data.analysis,
+    family = binomial(link = "logit"))
+```
+
+Notice that `R` defaults to complete-case analysis, that is, any row with a missing value is removed. We see in the model output that 96 of the 247 observations were deleted due to missingness ($96/247 = 38.9\%$) - we cannot afford such loss of information. All the more considering that not all columns are missing from the deleted rows!
+
+## Multiple imputation strategy :
+
+1. We use the mice function to multiply impute, say `m=5` times. 
+2. We call our logistic regression model on the multiply imputed object returned from our call to `mice` in a `with()` statement.
+3. We use `pool()` function call. This will correctly "pool" the 5 imputations into a single model analysis.
+4. We analyze the output, which has standard errors corrected for the uncertainty of the imputation^[See [van Buuren, Flexible Imputation of Missing Data](https://stefvanbuuren.name/fimd/) for more information].
+
+```{r}
+imp <- mice(data.analysis, m = 5, print = FALSE)
+
+logistic.regression <- with(imp, 
+                            glm(Binary_Outcome ~ Exposure + Age + Gender + Education, data = data.analysis, family = binomial(link = "logit"))
+                            )
+
+summary(pool(logistic.regression))
+
+```
+
+We get an output that allows us to do inference on model parameters, as usual and we find a significant effect of the **Exposure** on our **Binary_Outcome**!
