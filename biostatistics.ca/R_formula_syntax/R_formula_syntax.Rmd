@@ -1,0 +1,162 @@
+---
+title: "R's Formula syntax"
+date: \today
+author:
+output:
+  html_document:
+    css: "C:/Users/belai/Documents/JBConsulting/GitHub/biostatistics/biostatistics.ca/theme.css"
+    #toc: TRUE
+    #toc_float : TRUE
+    #toc_depth : 2
+    header_includes:
+      - \usepackage{amsmath, amssymb, amsthm, mathtools}
+      - \newcommand{\training}{\mathcal{X} \times \mathcal{Y}}
+      - \newcommand{\defeq}{:=}
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, class.source = "rcode", class.output = "rcode")
+```
+
+By Justin Bélair &copy; | Biostatistician at [JB Statistical Consulting](https://www.justinbelair.ca)
+
+[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
+
+![](C:/Users/belai/Documents/JBConsulting/GitHub/biostatistics/biostatistics.ca/Justin-35(1).jpg){height=50%}
+
+\newpage
+
+# Introduction 
+
+One of the basic things we learn to do when first approaching `R` is often fitting a basic linear model. Did you know there is a rich formula syntax that can help us make more complex models? We will start by simulating a small dataset that will be used in turn to create complex model formulas! 
+
+Let's do it!
+
+## Simulating Data
+
+```{r}
+
+set.seed(1) #for reproducibility
+n <- 25 #sample size
+
+# we simulate 3 independent covariates
+a <- rnorm(n, 0, 1)
+b <- rnorm(n, 0, 1)
+c <- rnorm(n, 0, 1)
+
+# The true outcome
+
+y <- 1 + a + b + c + a*b + a*c + b*c + a*b*c + rnorm(n, 0, 1)
+
+# We collect the data in a data.frame
+
+dat <- data.frame(y = y, a = a, b = b, c = c)
+
+```
+
+The outcome variable, i.e. `y`, in the above code-chunk is computed as sum of many effects : the main effects, the two-way interaction effects and the three-way interaction effect.
+
+## The `*` and the `^` Operators
+
+In practice, we don't usually know beforehand which specification is right! But let's show how we can fit a simple model with only main effects, all the way to the fully specified model with the 3-way interaction terms using `R`'s built-in formula shortcuts.
+
+```{r}
+main.effect.lm <- lm(y ~ a + b + c, data = dat)
+summary(main.effect.lm)
+
+```
+
+This function call is straightforward : we are simply fitting `y` in terms of the sum of 3 covariates, `a`, `b`, and `c`, each with their own model coefficient. Things get interesting when we want the two- or three-way interactions. 
+
+The `^2` operator will reduce to `(a+b+c)*(a+b+c)`, which is simply the full-model effects up-to second order interactions. Indeed, the two-model outputs below are identical.
+
+```{r}
+two.way.interactions.lm <- lm(y~ (a+b+c)^2, data = dat)
+coefficients(two.way.interactions.lm)
+
+# same as
+
+two.way.interactions.lm.bis <- lm(y~ (a+b+c)*(a+b+c), data = dat)
+coefficients(two.way.interactions.lm.bis)
+```
+Indeed, both model calls above yield the same coefficients^[A call to `summary()` would show the exact same model output, but in the spirit of conciseness we chose to illustrate only the coefficients.].
+
+The full-model specification up to interactions of order 3, is obtained simply by using the `^3` operator. Indeed, both sets of model coefficients below are identical^[We know the three-way interaction model is the correct one and this is highlighted by the high R-squared, the very small p-value associated with the F-statistic, the model coefficients being estimated close to 1, and the model coefficients all being significantly different than 0 at the 5% level. These can be obtained by calling `summary(three.way.interactions.lm)`.].
+
+```{r}
+three.way.interactions.lm <- lm(y~ (a+b+c)^3, data = dat)
+coefficients(three.way.interactions.lm)
+
+#same as
+
+three.way.interactions.lm.bis <- lm(y~ (a+b+c)*(a+b+c)*(a+b+c), data = dat)
+coefficients(three.way.interactions.lm.bis)
+```
+
+# Advanced Model Formula
+
+The `*` and the `^` operators are likely to be the most useful. But there are other interesting operators.
+
+## The `%in%` and `/` Operators
+
+The `%in%` operator denotes a nesting structure. For example, if `a` is nested in `b`, we would write `a %in% b`. This reduces to `a:b`, which in turn is simply the interaction effect. 
+
+```{r}
+lm.a.in.b <- lm(y ~ a%in%b, data= dat)
+coefficients(lm.a.in.b)
+```
+In practice, we would rarely be interested in looking at the interaction effect alone and, again when `a` is nested within `b`, we would likely be more interested in looking at `a + a %in% b`, which is equivalent to `a + a:b`. The shorthand formula for this is `a/b`, as we see below.
+
+```{r}
+lm.a.nested.b <- lm(y ~ a/b, data = dat)
+coefficients(lm.a.nested.b)
+```
+This would make sense, because if `a` is nested within `b`, we wouldn't look at the main effect of `b` conditional on a level of `a`. Rather, we would be interested in fixing `b` at a certain level and looking at the effect of `a` within that level because the effect of `a` would vary within levels of `b`. This is exactly what the above model is doing.
+
+## The `-` Operator
+
+This operator is quite simple : it removes terms from the model formula. For example, if we specify the two-way interaction terms using `(a+b+c)^2` but would like to remove, say, the `a:b` interaction, we could write the RHS of the model like this : `(a+b+c)^2 - a:b`.
+
+```{r}
+lm.two.way.interactions.except.a.b <- lm(y ~ (a+b+c)^2 - a:b, data = dat)
+coefficients(lm.two.way.interactions.except.a.b)
+```
+It works!
+
+The `-` operator can be used to fix the intercept at the origin (sometimes referred to as removing the intercept term from the model). For example, we could use `(a+b+c)^3` for the full-model up to the order-3 interactions and add `- 1` to remove the intercept term.
+
+```{r}
+lm.three.way.interaction.wo.intercept <- lm(y ~ (a+b+c)^3 - 1, data = dat)
+coefficients(lm.three.way.interaction.wo.intercept)
+```
+# Using Basic Arithmetic Functions
+
+Now, you might be wondering : "if `/`, `^` or even `*` don't denote there basic arithmetic expressions in `R` formulae when used in model calls, how can I divide, exponentiate, or multiply variables in a model call? Do I have to create a new variable in the dataset before calling the model fitting function?" Short answer : you could, but `R` developed thought about that!
+
+To evoke the "regular" sense of basic arithmetic functions, we use the `R` function `I()`. For example, if we want to model the sum of `a` and `b` as its own covariate, we simply write `I(a+b)` in our model call.
+
+```{r}
+lm.sum <- lm(y ~ I(a+b), data=dat)
+coefficients(lm.sum)
+```
+
+Indeed, we see in the model coefficients above that there is only one model coefficient associated with the new constructed variable, the sum of `a` and `b`. This works for most basic `R` functions. Here are a few examples.
+
+```{r}
+lm.product <- lm(y~ I(a*b), data =dat)
+coefficients(lm.product)
+
+lm.quotient <- lm(y~ I(a/b), data =dat)
+coefficients(lm.quotient)
+
+lm.exponential <- lm(y ~ I(a^2), data=dat)
+coefficients(lm.exponential)
+```
+# Takeaways
+
+1. The `+`, `-` `*`,`/`, and `^` arithmetic operators have a different meaning when used in model formulae.
+2. These operators, along with `%in%`, can be used to concisely write complex formulae.
+3. To revert back to their basic interpretations, we use `I()`.
+
+# References
+
+These special formula operators are concisely explained in the `stats` package document that can be found [here](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/formula.html).
