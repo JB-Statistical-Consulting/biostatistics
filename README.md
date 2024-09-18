@@ -1,4 +1,4 @@
-Welcome To JB Statistical Consulting's biostatistics repo!
+Welcome To JB Statistical Consulting's biostatistics repo, in partnership with www.biostatistics.ca!
 
 In it, you will find
 - Biostatistics Reading List
