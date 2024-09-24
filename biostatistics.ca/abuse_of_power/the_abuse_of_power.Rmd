@@ -12,7 +12,7 @@ output:
 
 ## Introduction
 
-[Download the R Markdown notebook here](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca/abuse_of_power) used to generate this blog post and practice your R skills for free!
+*[Download the R Markdown notebook here](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca/abuse_of_power) used to generate this blog post and practice your R skills for free!*
 ```{r setup, echo = FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 path <- "C:/Users/justi/Documents/Github/biostatistics/biostatistics.ca/abuse_of_power"
@@ -286,4 +286,4 @@ In Sander Greenland's 2012 paper *Nonsignificance Plus High Power Does Not Imply
 ## Some References
 
 - Daniel Lakens has a [great blog post](https://daniellakens.blogspot.com/2014/12/observed-power-and-what-to-do-if-your.html) about this.
-- If you want to learn how to use power correctly to calculate required sample sizes, I recommend [this book](https://www.amazon.ca/Design-Analysis-Experiments-Douglas-Montgomery/dp/1118146921) by Douglas Montgomery. I will eventually write more about this, but in the meantime don't hesitate to [reach out](www.justinbelair.ca) by filling out a contact form or by [Linkedin DM](https://www.linkedin.com/in/justinbelair/) if you need help with this.
+- If you want to learn how to use power correctly to calculate required sample sizes, I recommend [this book](https://www.amazon.ca/Design-Analysis-Experiments-Douglas-Montgomery/dp/1118146921) by Douglas Montgomery. I will eventually write more about this, but in the meantime don't hesitate to [reach out here](https://justinbelair.ca/contact/) or by [Linkedin DM](https://www.linkedin.com/in/justinbelair/) if you need help with this.
