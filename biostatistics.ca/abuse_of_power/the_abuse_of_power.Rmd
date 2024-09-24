@@ -12,10 +12,10 @@ output:
 
 ## Introduction
 
-[Download the R Markdown notebook here]() used to generate this blog post and practice your R skills for free!
+[Download the R Markdown notebook here](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca/abuse_of_power) used to generate this blog post and practice your R skills for free!
 ```{r setup, echo = FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-path <- "C:/Users/justi/Documents/GitHub/Content/power"
+path <- "C:/Users/justi/Documents/Github/biostatistics/biostatistics.ca/abuse_of_power"
 setwd(path)
 
 library(ggplot2)
