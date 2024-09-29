@@ -99,6 +99,11 @@
 - Tyler J. VanderWeele, *Explanations in Causal Inference : Methods for Mediation and Interaction*, 2015 (Book)
   - A thick, somewhat terse book by the leading researcher in mediation and interaction analysis in causal inference. This book is aimed at advanced users of causal inference methods, but it is truly unique in its depth of the subject! It is written by an epidemiologist but he also targets a social science audience.
 
+### Tutorials
+
+- [Andy Wilson & Aimee Harrison, Crash course on confounding, bias, and deconfounding remedies using R, 2024] (https://www.biostatistics.ca/crash-course-on-confounding-bias-and-deconfounding-remedies-using-r/)
+	- A great blog post about practical, hands-on methods (including R code) to remove confounding and estimate unbiased treatment effects.
+
 ### Propensity Score
 
 - [Peter C. Austin, An Introduction to Propensity Score Methods for Reducing the Effects of Confounding in Observational Studies, 2011](https://doi.org/10.1080%2F00273171.2011.568786)
