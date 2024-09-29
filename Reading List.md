@@ -1,6 +1,7 @@
-# A free biostatistics reading list :)
+# A free biostatistics reading list (with Causal Inference)
 
 - Visit [www.justinbelair.ca](https://www.justinbelair.ca/?utm_source=GitHub&utm_medium=reading_list&utm_campaign=header) if you have any questions or need help with statistics.
+- Visit [www.biostatistics.ca](https://www.biostatistics.ca/?utm_source=Github&utm_medium=reading_list&utm_campaign=header) for blog articles about biostatistics/causal inference, comprehensive guides about education/careers in biostatistics/causal inference, free downloadable resources, and more.
 
 ## Fundamentals
 
@@ -97,6 +98,23 @@
   
 - Tyler J. VanderWeele, *Explanations in Causal Inference : Methods for Mediation and Interaction*, 2015 (Book)
   - A thick, somewhat terse book by the leading researcher in mediation and interaction analysis in causal inference. This book is aimed at advanced users of causal inference methods, but it is truly unique in its depth of the subject! It is written by an epidemiologist but he also targets a social science audience.
+
+### Propensity Score
+
+- [Peter C. Austin, An Introduction to Propensity Score Methods for Reducing the Effects of Confounding in Observational Studies, 2011](https://doi.org/10.1080%2F00273171.2011.568786)
+	- A great introduction to propensity score (PS) methods used for matching, stratification, and IPTW methods with comparisons between them. There is also a discussion about computing covariate balance and choosing predictors for the propensity score model. It ends with a discussion about PS methods vs. regression adjustment.
+- [Brookhart et al., Variable Selection for Propensity Score Models, 2006](https://doi.org/10.1093/aje/kwj149)
+	- A thorough discussion grounded in simulation studies about when to include variables in the propensity score (PS) model, especially by considering them as related to the treatment, the outcome, or both.
+- [King & Nielsen, Why Propensity Scores Should Not Be Used for Matching, 2019](https://gking.harvard.edu/files/gking/files/pan1900011_rev.pdf)
+	- A much-discussed paper that criticizes propensity score matching techniques on grounds that the method tries to approximate complete randomization, while approximating block (or stratified) randomization gives better results.
+- [Schuster et al., Propensity score model overfitting led to inflated variance of estimated odds ratios, 2016](https://doi.org/10.1016/j.jclinepi.2016.05.017)
+	- A Monte Carlo simulation showing why propensity score (PS) models shouldn't be overfit. As a matter of fact, the quality of fit is not a primary concern when fitting a PS model.
+- [Setoguchi et al., Evaluating uses of data mining techniques in propensity score estimation: a simulation study, 2008](https://doi.org/10.1002/pds.1555)
+	- A simulation study evaluation of logistic regression (LR), tree-based methods with and without pruning, and neural networks as the model classes used to fit propensity score (PS) models. The main takeaway is that results based on a LR PS model are robust.
+- [Elizabeth Stuart, Matching methods for causal inference: A review and a look forward, 2010](https://doi.org/10.1214%2F09-STS313)
+	- The title says it all : a review and look forward about different matching techniques used to emulate randomized trials, including propensity score matching.
+- [Rosenbaum & Rubin, The Central Role of the Propensity Score in Observational Studies for Causal Effects, 1983] (https://doi.org/10.2307/2335942)
+	- The landmark paper where the propensity score is introduced and its properties derived, most notably that conditioning on the propensity score also "deconfounds" the treatment assignment. A classic.
 
 ## Clinical Prediction Modelling
 
