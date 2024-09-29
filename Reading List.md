@@ -101,7 +101,7 @@
 
 ### Tutorials
 
-- [Andy Wilson & Aimee Harrison, Crash course on confounding, bias, and deconfounding remedies using R, 2024] (https://www.biostatistics.ca/crash-course-on-confounding-bias-and-deconfounding-remedies-using-r/)
+- [Andy Wilson & Aimee Harrison, Crash course on confounding, bias, and deconfounding remedies using R, 2024](https://www.biostatistics.ca/crash-course-on-confounding-bias-and-deconfounding-remedies-using-r/)
 	- A great blog post about practical, hands-on methods (including R code) to remove confounding and estimate unbiased treatment effects.
 
 ### Propensity Score
@@ -118,7 +118,7 @@
 	- A simulation study evaluation of logistic regression (LR), tree-based methods with and without pruning, and neural networks as the model classes used to fit propensity score (PS) models. The main takeaway is that results based on a LR PS model are robust.
 - [Elizabeth Stuart, Matching methods for causal inference: A review and a look forward, 2010](https://doi.org/10.1214%2F09-STS313)
 	- The title says it all : a review and look forward about different matching techniques used to emulate randomized trials, including propensity score matching.
-- [Rosenbaum & Rubin, The Central Role of the Propensity Score in Observational Studies for Causal Effects, 1983] (https://doi.org/10.2307/2335942)
+- [Rosenbaum & Rubin, The Central Role of the Propensity Score in Observational Studies for Causal Effects, 1983](https://doi.org/10.2307/2335942)
 	- The landmark paper where the propensity score is introduced and its properties derived, most notably that conditioning on the propensity score also "deconfounds" the treatment assignment. A classic.
 
 ## Clinical Prediction Modelling
