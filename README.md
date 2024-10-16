@@ -1,7 +1,7 @@
-Welcome To JB Statistical Consulting's biostatistics repo, in partnership with [biostatistics.ca](https://www.biostatistics.ca/?utm_source=github&utm_medium=readme&utm_campaign=header)!
+Welcome [biostatistics.ca](https://www.biostatistics.ca/?utm_source=github&utm_medium=readme&utm_campaign=header) repo, in partnership with [JB Statistical Consulting](https://www.justinbelair.ca/?utm_source=GitHub&utm_medium=read_mew&utm_campaign=welcome)!
 
 In it, you will find
-- Biostatistics Reading List
+- [Biostatistics Reading List](https://github.com/JB-Statistical-Consulting/biostatistics/blob/main/Reading%20List.md)
   - A curated selection of papers (including DOI links), books, and other materials to help improve your understanding of biostatistics
 - Tutorials on technical tools such as R, Github, and others
 - RMarkdown source notebooks for the [biostatistics.ca](https://www.biostatistics.ca/?utm_source=github&utm_medium=readme&utm_campaign=header) blog
