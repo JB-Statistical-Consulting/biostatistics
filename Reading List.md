@@ -1,5 +1,6 @@
 # A free Causal Inference in Biostatistics reading list
 
+- Check out the complete [Biostatistics Roadmap, or How to Become a Great Biostatistician](https://www.biostatistics.ca/the-biostatistics-roadmap-or-how-to-become-a-great-biostatistician/?utm_source=github&utm_medium=reading_list&utm_campaign=roadmap)
 - [Sign up for my monthly Causal Inference in Biostatistics Newsletter](https://causal-inference-in-statistics.beehiiv.com/subscribe?utm_source=github&utm_medium=reading_list&utm_campaign=header) to receive free content directly in your inbox.
 - Visit [www.justinbelair.ca](https://www.justinbelair.ca/?utm_source=GitHub&utm_medium=reading_list&utm_campaign=header) if you have any questions or need help with statistics.
 - Visit [www.biostatistics.ca](https://www.biostatistics.ca/?utm_source=Github&utm_medium=reading_list&utm_campaign=header) for blog articles about biostatistics/causal inference, comprehensive guides about education/careers in biostatistics/causal inference, free downloadable resources, and more.
