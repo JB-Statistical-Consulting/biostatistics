@@ -1,0 +1,73 @@
+---
+title: Sample Size Estimates Done Via Power Calculation Are Uncertain
+date: \today
+author:
+output:
+  html_document:
+    #toc: TRUE
+    #toc_float : TRUE
+    #toc_depth : 2
+    header_includes:
+      - \usepackage{amsmath, amssymb, amsthm, mathtools}
+      - \newcommand{\training}{\mathcal{X} \times \mathcal{Y}}
+      - \newcommand{\defeq}{:=}
+---
+[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
+
+\newpage
+
+## Introduction
+
+I often see the results of power calculations used as if there is no uncertainty around the required sample size number obtained. This is a misconception, made almost invisible by the fact that traditional software tools like G-Power, SPSS, etc. don't provide any hint of the uncertainty around the sample size number they provide.
+
+In short, estimates of the anticipated effect size from the study are by definition uncertain, or else the study wouldn't be needed - this uncertainty is transferred to the sample size number obtained via a power calculation.
+
+Let's give a few quick examples.
+
+## A Simple Example - the t-test
+
+With an effect-size of 0.5, we need ~64 patients for a two-sample t-test with common standard deviation 1 to have 80% power at the 5% significance level.
+
+```{r}
+delta <- 0.5
+sd <- 1
+
+n <- power.t.test(delta = delta, sd = sd, sig.level = 0.05, power = 0.8)$n
+
+n
+```
+### The t-test with an uncertain delta parameter
+
+In practice, the delta is uncertain. Let's suppose there is uncertainty of about 5\% of the estimated value. For now, we assume the standard deviation is also known.
+
+```{r}
+delta.range <- c(1-0.05, 1, 1+0.05)*delta
+n.delta.range <- sapply(delta.range, \(x) power.t.test(delta = x, sd = sd, sig.level = 0.05, power = 0.8)$n)
+
+n.delta.range
+```
+We see that a range of ~58 to ~71 patients would be compatible with a small uncertainty around the estimate of delta.
+
+### The t-test with an uncertain delta and standard deviation parameters
+
+Let's add uncertainty around the standard deviation as well, using the same approach.
+
+```{r}
+sd.range <- c(1+0.05, 1, 1-0.05)*sd
+
+n.delta.sd.range <- mapply(FUN = function(x,y){power.t.test(delta = x, sd = y, sig.level = 0.05, power = 0.8)$n},
+                           delta.range, sd.range)
+
+n.delta.sd.range
+```
+This additional uncertainty widens the range from ~53 to ~78 patients. The $n=64$ patients we found without considering the uncertainty inherent in estimating the effect-size and the standard deviation before hand could seriously mislead us if we do not account for it. 
+
+## Conclusion
+
+Be vigilant! Test a range of plausible values - you might be shocked by what you see. Your study might might heavily dependent on a false sense of confidence around the parameter values used to estimate the required sample size. 
+
+Using a range of estimates for the effect-size and correspondingly determining a range of plausible sample sizes might give you a better understanding of the power you have to detect interesting effects.
+
+Even better, consult a statistician to help you navigate the uncertainty in your study design. 
+
+If you need help with statistics, don't hesitate to reach out to me at [JB Statistical Consulting](www.justinbelair.ca).
