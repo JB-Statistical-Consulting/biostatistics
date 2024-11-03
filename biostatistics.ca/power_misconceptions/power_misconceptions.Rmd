@@ -3,14 +3,7 @@ title: Sample Size Estimates Done Via Power Calculation Are Uncertain
 date: \today
 author:
 output:
-  html_document:
-    #toc: TRUE
-    #toc_float : TRUE
-    #toc_depth : 2
-    header_includes:
-      - \usepackage{amsmath, amssymb, amsthm, mathtools}
-      - \newcommand{\training}{\mathcal{X} \times \mathcal{Y}}
-      - \newcommand{\defeq}{:=}
+  html_document
 ---
 [Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
 
@@ -48,7 +41,7 @@ n.delta.range
 ```
 We see that a range of ~58 to ~71 patients would be compatible with a small uncertainty around the estimate of delta.
 
-### The t-test with an uncertain delta and standard deviation parameters
+### The t-test with uncertain delta and standard deviation parameters
 
 Let's add uncertainty around the standard deviation as well, using the same approach.
 
