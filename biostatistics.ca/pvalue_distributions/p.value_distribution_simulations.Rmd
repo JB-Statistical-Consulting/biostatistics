@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Introdution 
+## Introduction 
 
 In this simulation, we will investigate the distribution of p-values : both when the null hypothesis is true. The idea is simply to simulate a sample size of $n$ from normal distributions of standard deviation 1 that get progressively shifted as we change the mean (feel free to modify the simulation parameters and rerun the simulations yourself by downloading the [free R Code Notebook here!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca) Then, we test this mean against $H_0 : \mu_0 = 0$ using a t-test.
 
