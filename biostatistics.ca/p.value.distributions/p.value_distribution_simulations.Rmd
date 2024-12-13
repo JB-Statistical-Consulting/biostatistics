@@ -1,0 +1,118 @@
+---
+title:
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+
+knitr::opts_chunk$set(
+  warning = FALSE,   # Suppress warnings
+  message = FALSE,   # Suppress messages
+  echo = TRUE,       # Show code (optional)
+  fig.align = 'center' # Center plots
+)
+```
+
+## Introdution 
+
+In this simulation, we will investigate the distribution of p-values : both when the null hypothesis is true. The idea is simply to simulate a sample size of $n$ from normal distributions of standard deviation 1 that get progressively shifted as we change the mean (feel free to modify the simulation parameters and rerun the simulations yourself by downloading the [free R Code Notebook here!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca) Then, we test this mean against $H_0 : \mu_0 = 0$ using a t-test.
+
+## Simulating P-values Distribution
+
+```{r}
+#number of simulations
+n_experiment <- 25000
+
+#simulation parameters
+n <- 20
+sd <- 1
+means <- c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 1, 1.25, 1.5)
+```
+
+We then run the simulation and plot the results. The code below will generate both histograms and empirical cumulative distribution function (ecdf) plots to visualize the distribution of the p-values.
+
+### Computer Simulation Results
+
+Notice how when the null hypothesis is true, the p-value is *uniformly distributed* between 0 and 1. This might be surprising at first thought, but it makes a lot of sense. If the null hypothesis is true, what is the probability that $p<0.05$? Well, by definition it's 0.05, since there is absolutely no effect under the null hypothesis : we would declare significance erroneously around 5 times out of 100, or 0.05. This is true for any value, the probability that $p<p_0$ for any $p_0$ is exactly $p_0$ : this is the *definition* of a uniform distribution.
+
+Cool, huh?
+
+Then, when the mean moves, the p-value distribution shifts to the left, and the probability of getting a significant result increases. This is because the t-test is more likely to reject the null hypothesis when the true mean is different from 0.
+
+See the results below. To see the simulation code, [Download the Free R Code Notebook here!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
+
+```{r echo=FALSE}
+set.seed(1) # for reproducibility
+
+#initializing variables
+sim.sign.level <- c()
+p.values <- matrix(NA, nrow = n_experiment, ncol = length(means))
+p.value_hist <- list()
+p.value_ecdf <- list()
+j <- 0
+
+#looping over different values of true parameter (i.e true mean)
+for (mean in means){
+  #counting the iteration through means
+  j <- j+1
+  
+  #starting counter of significant tests to estimate true significance level
+  significant.t.test <- 0
+  
+  #running the experiments
+  for (experiment in 1:n_experiment){
+    #sim data
+    x <- rnorm(n, mean, sd)
+    #extract t.test p-value for mu = 0
+    p.values[experiment, j] <- t.test(x)$p.value
+    
+    #counting if test is significant
+    if (p.values[experiment, j] < 0.05){
+      significant.t.test <- significant.t.test + 1
+    }
+  }
+
+  sim.sign.level[j] <- significant.t.test/n_experiment
+  
+  #plotting results as density histograms and empirical cdf
+
+  data <- data.frame(p_values = p.values[, j])
+  
+  p.value_hist[[j]] <- data %>%
+    ggplot(aes(x = p_values)) +
+      geom_histogram(aes(y = after_stat(density)), bins = 25, fill = "#bd93f9", alpha = 0.6) +
+      geom_density(color = "#ff5555", size = 1) +
+      labs(
+        title = paste("Pval for t.test H0: mu = 0, when true mean mu = ", mean, " (n =", n, ")"),
+        x = "P-values",
+        y = "Density"
+      ) +
+      theme_minimal()
+  
+  # Plotting the empirical cumulative distribution function (ecdf)
+  
+  p.value_ecdf[[j]] <- data %>%
+    ggplot(aes(x = p_values)) +
+      stat_ecdf(geom = "step", color = "#44475a", size = 1) +
+      labs(
+        title = paste0("Pval for t.test H0: mu = 0, when true mean mu = ", mean, " (n =", n, ")"),
+        x = "P-values",
+        y = "ECDF"
+      ) +
+      theme_minimal()
+
+# Print in a 2x1 layout
+grid.arrange(p.value_hist[[j]], p.value_ecdf[[j]], nrow = 2)
+}
+```
+
+## Conclusion
+
+Under the null hypothesis, by definition the p-value has a uniform distribution. As we move away from the null hypothesis, the p-value skews towards smaller and smaller values. This is obviously desirable : we want the p-value to help us detect effects when they are present, in spite of sampling uncertainty.
+
+If you want to learn more about p-values and statistical inference, how to run simulations like this, and how to do statistics the right way, consider joining my [*Introduction to Biostatistics : Learn Statistics the Right Way!* Course](https://justinbelair.ca/introduction-to-biostatistics/?utm_source=biostatistics&utm_medium=blog&utm_campaign=p-values-distribution) where I teach you everything you need to know about statistics and data analysis.
