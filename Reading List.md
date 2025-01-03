@@ -30,6 +30,19 @@
   - The title says it all.
 - [Harvey J. Motulsky, Common misconceptions about data analysis and statistics, 2014](https://doi.org/10.1007%2Fs00210-014-1037-6)
   - Goes over many misconceptions. It is quite beginner friendly, take a look!
+
+### Dichotomania: How Dichotomizing Continous Variables is Detrimental to Science
+
+- Key Articles and Papers
+	- [Dichotomania: An Obsessive-Compulsive Disorder that is Rampant in Clinical Research](https://www.semanticscholar.org/paper/Dichotomania%3A-An-Obsessive-Compulsive-Disorder-that-Senn/8c390cb90465ad1f08b86cee52474859e4dffd77)  
+	- [Statistical Errors in the Medical Literature](https://www.fharrell.com/post/errmed/)  
+	- [Consequences of Dichotomization](https://pubmed.ncbi.nlm.nih.gov/24475020/)  
+	- [Three Problems with Dichotomization](https://journals.sagepub.com/doi/10.1177/014662168300700301)  
+
+- Real-World Examples of the Disservice Dichotomization Causes:
+	- [Quality & Safety in Healthcare](https://qualitysafety.bmj.com/content/26/10/799)  
+	- [British Medical Journal (BMJ)](https://www.bmj.com/content/357/bmj.j2353)  
+	- [Circulation: Arrhythmia and Electrophysiology](https://www.ahajournals.org/doi/full/10.1161/circep.117.006091)  
   
 ### Design of Experiments
 
