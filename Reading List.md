@@ -98,6 +98,9 @@
 ## Causal Inference
 
 ### Fundamentals
+
+- Justin Belair, [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks](https://justinbelair.ca/causal-inference-in-statistics-book/?utm_source=github&utm_medium=reading_list&utm_campaign=header)
+
 - Judea Pearl, *Causality : Models, Reasoning and Inference*, 2000, updated in 2009 (Book)
   - A true masterpiece. A technical and deep exposition of Pearl's life work on Directed Acyclic Graphs (DAGs) as Structural Causal Models (SCMs) that got me started on my causal inference journey. His viewpoint is an alternative to the Neyman-Rubin causal model based on potential outcomes. This book can also be seen as the academic version of The Book of Why, a famous general-audience book on causality.
     
