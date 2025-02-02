@@ -1,0 +1,159 @@
+---
+title:
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+set.seed(1)
+
+library(ggplot2)
+library(dplyr)
+library(ggdag)
+
+knitr::opts_chunk$set(
+  warning = FALSE,   # Suppress warnings
+  message = FALSE,   # Suppress messages
+  echo = TRUE,       # Show code (optional)
+  fig.align = 'center' # Center plots
+)
+```
+
+[Find the RMarkdown Notebook on Github and Run the Code Yourself!](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca)
+
+## Introduction - What is Collider Bias?
+
+Collider bias occurs when we condition on (or select based on) a variable that is influenced by both the exposure and outcome of interest. This seemingly innocent action can create spurious associations between variables that are actually independent. Let's explore this through some concrete examples.
+
+### Example: College Admissions
+Consider college admissions where students can be admitted based on either high intellectual ability or high athletic ability. Let's simulate some data where these abilities are actually independent in the population. Next, we create an indicator for `admission` based on whether a student has high intellectual ability or high athletic ability. We then plot the data to see how the selection process affects the relationship between intellectual and athletic ability.
+
+```{r}
+selection.bias <- data.frame("intellectual.ability" = rnorm(500, 0, 1),
+                             "athletic.ability" = rnorm(500, 0, 1)
+                             ) %>%
+  mutate(admission = (intellectual.ability > 1) | (athletic.ability > 1.5)
+         )
+```
+
+If you want to access the code to create the plot below, the code RMarkdown notebook used for this blog post is [available for free on Github](https://github.com/JB-Statistical-Consulting/biostatistics/tree/main/biostatistics.ca).
+
+```{r, echo = FALSE}
+select.bias.plot <- selection.bias %>%
+  ggplot(aes(x = intellectual.ability, y = athletic.ability)) +
+  geom_point(aes(colour = admission)) +
+  scale_color_manual(values = c("FALSE" = "#989898", "TRUE" = "#000000"))+
+  geom_smooth(method = "lm", se = FALSE, colour = "#000000") +
+  geom_label(x = 2, y = 2, label = "Admitted Students", colour =  "#000000", label.size = 0.5) +
+  geom_label(x = -2, y = -2, label = "Rejected Students", colour =  "#989898", label.size = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks = element_blank(),
+        axis.text = element_blank()) +
+  xlab("Intellectual Ability") +
+  ylab("Athletic Ability") +
+  theme(plot.title = element_text(size = 20),
+        axis.title.x = element_text(size = 20),
+        axis.title.y = element_text(size = 20))
+
+print(select.bias.plot)
+```
+
+From this plot, we see that there is basically no relationship between intellectual and athletic ability in the population. Indeed, when fitting a linear regression model, we get a slightly negative slope.
+
+```{r}
+lm(athletic.ability ~ intellectual.ability, data= selection.bias) %>%
+  summary()
+```
+ Yet, the coefficient is not significantly different from 0. We know (because we generated the data) that the real-value is 0.
+
+However, when we condition on `admission`, we see a strong negative relationship between intellectual and athletic ability. 
+
+
+```{r, echo = FALSE}
+selection.bias.selected.plot <- selection.bias %>%
+  filter(admission) %>%
+  ggplot(aes(x = intellectual.ability, y = athletic.ability, colour = admission)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+    scale_color_manual(values = c("TRUE" = "#000000"))+
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_label(x = 2, y = 2, label = "Admitted Students", colour =  "#000000", label.size = 0.5) +
+  theme(legend.position = "none",
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 20)
+        )
+
+print(selection.bias.selected.plot)
+```
+This is confirmed by estimating the coefficient of the linear regression model when conditioning on `admission`.
+
+```{r}
+lm(athletic.ability ~ intellectual.ability, data= selection.bias %>% filter(admission)) %>%
+  summary()
+```
+We obtain a highly significant negative coefficient. While this is visually intuitive in this specific example, it is not always so clear in real-world data. This is why it is important to learn to draw meaningful DAGs to represent background knowledge. In this specific example, it would look like this.
+
+```{r, echo = FALSE}
+theme_set(theme_dag())
+
+collider_dag <- collider_triangle(x_y_associated = TRUE,
+  x = "Intellectual Ability",
+  y = "Athletic Ability",
+  m = "Admitted (selected) to college"
+  ) %>%
+  tidy_dagitty() %>% 
+  mutate(linetype = ifelse(to == "y", "dashed", "solid"),
+         direction = ifelse(to == "y", "<->", "->")) %>%
+  ggplot(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  geom_dag_point() + 
+  geom_dag_label(aes(label = label), nudge_x = 0.01, nudge_y = -0.05, show.legend = FALSE) + 
+  geom_dag_edges(aes(edge_linetype = linetype), curvature = 0, 
+                 arrow_directed = grid::arrow(length = grid::unit(12, "pt"), type = "closed"),
+                 arrow_bidirected = grid::arrow(length = grid::unit(12, "pt"), ends = "both", type = "closed"),
+                 show.legend = FALSE) +
+  geom_text(x=1, y=1.05, label = "Spurious Correlation ?")
+
+print(collider_dag)
+```
+
+The theory of graphical causal models developed by Judea Pearl and others tells us that when there is a path between two variables of the form `athletic_ability -> admission <- intellectual ability` the variable `admission` is a *collider*. The concept of *d-separation* tells us that conditioning on a collider induces spurious correlation and biases the (causal) estimate we are seeking to establish[^1].
+
+It is not always obvious that our analysis is 'conditional' on a given variable when it is done through a selection mechanism. Oftentimes, we simply work with a dataset at hand and do not know immediately know the selection process that generated it. In this example, we implicitly condition on the admission variable if we simply select a sample from a university. I hope it is obvious that this form of bias can be lurking in many real-world problems, and it is one of the reasons why any experienced statistician always advises to study deeply the data-generating process.
+
+By this, it is meant that before doing any sort of analysis, a deep investigation of the origin of the data is warranted. This means understanding how and why it was collected, who was responsible for collection, was there any processing done before sending it to the statistician, was there a data management protocol specified in advance, is there specific domain-knowledge that the statistician should know, etc. In many cases, data is handled by research assistants, is generated by software, or is collected by a third-party. In these cases, the statistician should be in open discussion with anybody responsible for the data and any domain expert that can help gain any insight into the data.
+
+## Low Birth Weight Paradox
+
+An important real-world example of collider bias that baffled scientists for a long-time was the so-called "Low Birth Weight Paradox". Surprisingly, low birth-weight babies born to smoking mothers have a lower infant mortality rate than low birth-weight babies of non-smoking mothers. This is counterintuitive, because smoking is known to be an important risk factor for infant mortality, which is thought to be induced by low birth weight.
+
+In my upcoming book, [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks ](https://justinbelair.ca/causal-inference-in-statistics-book?utm_source=biostatistics&utm_medium=blog&utm_campaign=collider_bias), I discuss this paradox in detail using a real dataset. It forms the case-study of Chapter 4 on Observational Studies, where I give the reader the dataset and a code notebook to walk through the analysis. Visit the book page to learn more and download the first chapter for free.
+
+## Why Does This Matter?
+Collider bias is not just a theoretical concern. It appears in many real-world scenarios:
+
+- Hospital-based studies (selecting on being hospitalized)
+- Social media analysis (selecting on platform usage)
+- Survey response bias (selecting on willingness to respond)
+- Scientific publication bias (selecting on significant results)
+
+Understanding collider bias helps researchers avoid drawing incorrect conclusions when analyzing data that has been subject to selection processes.
+
+## Key Takeaways
+
+- Selection can create associations that don't exist in the full population
+- When analyzing data, we must be careful about conditioning on colliders
+- DAGs help us identify potential collider bias in our analyses
+
+## Conclusion
+
+Collider bias is a common and often overlooked source of bias in observational studies, especially when we did not perform any adjustment, but simply biased the sample through a selection mechanism. By understanding the concept of collider bias and how it can arise in real-world data, researchers can avoid drawing incorrect conclusions from their analyses. By using directed acyclic graphs (DAGs) to represent the relationships between variables in their data, researchers can identify potential sources of collider bias and adjust their analyses accordingly. By being aware of the potential for collider bias in their data, researchers can ensure that their analyses are accurate and reliable.
+
+If you want to receive monthly insights about Causal Inference in Statistics, please consider [subscribing to my newsletter](https://causal-inference-in-statistics.beehiiv.com/subscribe?utm_source=biostatistics&utm_medium=blog&utm_campaign=collider_bias). You will receive updates about my upcoming book, blog posts, and otherexclusive resources to help you learn more about causal inference in statistics. 
+
+Join the stats nerds🤓!
+
+[^1]: I discuss this theory in detail with examples, exericises, data, and code in my upcoming book [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks](https://justinbelair.ca/causal-inference-in-statistics-book?utm_source=biostatistics&utm_medium=blog&utm_campaign=collider_bias). 
