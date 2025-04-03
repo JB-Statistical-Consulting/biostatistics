@@ -1,0 +1,286 @@
+---
+title:
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+set.seed(1)
+
+library(ggplot2)
+library(dplyr)
+library(ggdag)
+
+knitr::opts_chunk$set(
+  warning = FALSE,   # Suppress warnings
+  message = FALSE,   # Suppress messages
+  echo = FALSE,       # Show code (optional)
+  fig.align = 'center' # Center plots
+)
+
+theme_set(theme_dag())
+```
+
+## Introduction
+
+Directed Acyclic Graphs (DAGs) are powerful tools for visualizing and understanding causal relationships. In this blog post, we'll explore common DAG structures that frequently appear in causal inference problems, simulate data according to these structures, and demonstrate how different analytical approaches can lead to correct or incorrect causal estimates. If you want to begin your journey of learning causal inference and don't know where to start, visit our [Causal Inference Guide: Books, Courses, and More](https://www.biostatistics.ca/causal-inference-guide-books-courses-and-more/?utm_source=biostatistics&utm_medium=blog&utm_campaign=common_DAG_structures_intro).
+
+If you're interested in obtaining the R code for this blog post, consider purchasing my upcoming book, [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks](https://justinbelair.ca/causal-inference-in-statistics-book?utm_source=biostatistics&utm_medium=blog&utm_campaign=common_DAG_structures_intro). Each Chapter contains a complete case-study with an extensive code notebook that you can use to grasp the principles using code. There are also exercises and practice projects to help you solidify your understanding of the material.
+
+Let's jump in!
+
+## Confounding
+
+One of the most basic causal structures is confounding, where a third variable affects both the treatment and the outcome. Here, $W$ is the treament, $Y$ is the outcome, and $Z$ is a confounder that affects both $W$ and $Y$.
+
+```{r}
+confounder_dag <- dagify(Y ~ W + Z,
+                   W ~ Z,
+                   exposure = "W",
+                   outcome = "Y",
+                   coords = list(x = c(Y = 1, W = -1, Z = 0)/2,
+                                 y = c(Y = 0, W = 0, Z = 1)/2)
+                   )
+
+confounder_dag <- ggdag(confounder_dag, text = TRUE, node_size = 16*1.5, text_size = 3.88*1.5) +
+  geom_dag_edges_link(arrow = grid::arrow(length = grid::unit(15, "pt"), type = "closed"))
+
+print(confounder_dag)
+```
+
+Let's simulate 200 data points that follow this structure and see what happens when we analyze it. The true treatment effect will be set at a value of 5. Since we simulate data that we know has a true treatment effect of 5, we will be able to assess the bias in our methods, i.e. the difference between our estimates and the ground-truth value of 5.
+
+Here is a snapshot of what the dataset looks like.
+
+```{r, echo= FALSE}
+n <- 200 # number of observations
+treatment_effect <- 5 # true treatment effect
+
+# Generate confounder
+Z <- rnorm(n, 5, 1) + rnorm(n, 0, 1) 
+
+# Treatment depends on confounder
+W <- rbinom(n, 1, plogis(Z-5))
+
+# Outcome depends on treatment and confounder
+Y <- rnorm(n, 2 + treatment_effect*W + 20*Z, 3) + rnorm(n, 0, 1)
+
+simulated_data_confounder <- data.frame(W, Z, Y)
+```
+
+
+```{r}
+head(simulated_data_confounder)
+```
+Now, let's fit two different models to this data and compare the results.
+
+- **Model 1** : We fit a simple linear regression model of outcome on treament, without adjusting for the confounder: \[Y \sim W\]
+- **Model 2** : We fit a linear regression model of outcome on treatment, adjusting for the confounder by adding it as a covariate: \[Y \sim W + Z\]
+
+```{r}
+Y_W <- simulated_data_confounder %>%
+  lm(Y ~ W, data = .)
+
+#correct model
+Y_W_Z <- simulated_data_confounder %>%
+  lm(Y ~ W + Z, data = .)
+
+Y_W_coef <- Y_W %>%
+  coef() %>%
+  c(., NA)
+
+Y_W_Z_coef <- Y_W_Z %>% 
+  coef() %>%
+  c(.)
+```
+
+
+```{r}
+coef_data <- as.data.frame(rbind(Y_W_coef, Y_W_Z_coef))
+
+names(coef_data) <- c("Intercept", "W", "Z")
+rownames(coef_data) <- c("Y ~ W", "Y ~ W + Z")
+
+coef_data
+```
+
+We see that when we correctly specify the model, the $W$ coefficient is close to the true treatment effect of 5. It is not exactly 5 due to sampling variability. However, when we fail to adjust for the confounder, we get a biased estimate. 
+
+It is not possible to determine beforehand the size and magnitude of bias based solely on the DAG. However, the DAG structure can help us identify the presence of bias and guide us in the right direction. Further structural knowledge about the relationship between the confounder and the treatment/outcome variables can help us assess the magnitude and direction of the bias if we were to omit adjusting for a confounder, e.g. if we did not measure it.
+
+## Collider Bias
+
+Another important structure is the collider, where a variable is influenced by both the treatment and the outcome. Formally, a collider has a definition that can be bit tricky[^1]. Informally, a collider is a variable that has two arrows pointing into it (see illustration below, where $Z$ is now a collider).
+
+
+```{r}
+collider_DAG <- dagify(Y ~ W,
+                       Z ~ W + Y,
+                   exposure = "W",
+                   outcome = "Y",
+                   coords = list(x = c(Y = 1, Z = 0, W = -1)/2,
+                                 y = c(Y = 0, Z = -1, W = 0)/2)
+                   )
+
+collider_DAG <- ggdag(collider_DAG, text = TRUE, node_size = 16*1.5, text_size = 3.88*1.5) +
+  geom_dag_edges_link(arrow = grid::arrow(length = grid::unit(15, "pt"), type = "closed"))
+
+print(collider_DAG)
+```
+Different selection bias mechanisms, such as differential loss-to-followup, convenience sampling, etc. can all be represented as bias induced by conditioning on a collider (or one of its descendants) in a DAG[^2]. One such example that is very common and not always easy to identify arises when a sample is selected based on some its characteristics. For example, when assessing the correlation of athletic ability and intellectual ability, selecting a sample of students from highly selective universities could induce a spurious correlation, leading to the false belief that intellectual ability leads student to achieve higher athletic ability, or vice-versa. See my [previous blog post](https://www.biostatistics.ca/selection-bias-a-causal-inference-perspective-with-downloadable-code-notebook/) on selection bias for a detailed illustration of this example.
+
+Let's simulate data and see what happens when we condition on a collider. The data looks like this.
+
+```{r}
+n <- 200 #number of observations to simulate
+treatment_effect <- 5 #true treatment effect
+ 
+W <- rbinom(n, 1, 0.5) #binary treatment, independent of collider
+Y <- rnorm(n, 2 + treatment_effect*W, 3) + rnorm(n, 0, 1) #outcome model + noise
+
+Z <- rnorm(n, 20*W + 20*Y, 3) + rnorm(n, 0, 1) #collider + noise
+```
+
+
+```{r}
+simulated_data_collider <- data.frame(W, Z, Y)
+
+head(simulated_data_collider)
+```
+
+We then fit 2 models:
+
+- **Model 1**: $Y \sim W$, correctly ignoring the collider
+- **Model 2**: $Y \sim W + Z$, erreneously adjusting for the collider
+
+```{r}
+#unadjusted model
+Y_W <- simulated_data_collider %>%
+  lm(Y ~ W, data = .)
+
+#erroneously adjusted model
+Y_W_Z <- simulated_data_collider %>%
+  lm(Y ~ W + Z, data = .)
+
+Y_W_coef <- Y_W %>%
+  coef() %>%
+  c(., NA)
+
+Y_W_Z_coef <- Y_W_Z %>% 
+  coef() %>%
+  c(.)
+
+coef_data <- as.data.frame(rbind(Y_W_coef, Y_W_Z_coef))
+
+names(coef_data) <- c("Intercept", "W", "Z")
+rownames(coef_data) <- c("Y ~ W", "Y ~ W + Z")
+
+coef_data
+```
+
+Looking at these results, we see that the effect estimate for the model that does not adjust for $Z$ is close to 5, as expected, whereas the model that adjusts for $Z$ gives a biased estimate. This is because conditioning on a collider can introduce bias in our treatment effect estimate. This can be counterintuitive--controlling for more variables doesn't always improve your analysis!
+
+## Mediators
+
+A mediator is a variable that lies on the causal pathway between exposure and outcome, such as $M$ in the DAG below.
+
+```{r}
+mediator_DAG <- dagify(Y ~ W + M,
+                       M ~ W,
+                   exposure = "W",
+                   outcome = "Y",
+                   coords = list(x = c(Y = 1, M = 0, W = -1)/2,
+                                 y = c(Y = 0, M = 1, W = 0)/2)
+                   )
+
+mediator_DAG <- ggdag(mediator_DAG, text = TRUE, node_size = 16*1.5, text_size = 3.88*1.5) +
+  geom_dag_edges_link(arrow = grid::arrow(length = grid::unit(15, "pt"), type = "closed"))
+
+print(mediator_DAG)
+```
+When working with mediators, we can decompose the total effect into direct and indirect effects. When the model is linear (as we have assumed in this example) these effects work additively along distincty paths. That is, \[\text{Total effect} = \text{Direct Effect} + \text{Indirect Effect}.\] 
+
+In this example, the treatment effect of $W$ on $Y$ is 5, and the effect of $W$ on $M$ is 2. The effect of $M$ on $Y$ is 3. The indirect effect is works multiplicatively along the path $W \rightarrow M \rightarrow Y$[^3]. Thus, the total effect is given by 
+\begin{align*}
+  \text{Total Effect} &= \text{Direct Effect} + \text{Indirect Effect} \\
+  &= 5 + 2 \times 3 \\
+  &= 11.
+\end{align*}
+
+The data looks like this.
+
+```{r simulating_mediator_DAG}
+n <- 200 #number of observations to simulate
+treatment_effect <- 5 #true treatment effect
+
+W <- rbinom(n, 1, 0.5) #binary treatment
+M <- rnorm(n, 2*W, 1) + rnorm(n, 0, 1) #treatment effect on mediator + noise
+Y <- rnorm(n, 2 + treatment_effect*W + 3*M, 3) + rnorm(n, 0, 1) #outcome model + noise
+```
+
+
+```{r}
+simulated_data_mediator <- data.frame(W, M, Y)
+head(simulated_data_mediator)
+```
+
+We then fit 3 models:
+
+- **Model 1**: $Y \sim W$, ignoring the mediation component
+- **Model 2**: $Y \sim W + M$, incorporating an adjustment for the mediator
+- **Model 3**: $M \sim W$, the mediation model, where we model the relationship between the mediator and the treatment indicator
+
+```{r}
+#unadjusted model
+Y_W <- simulated_data_mediator %>%
+  lm(Y ~ W, data = .)
+
+#model for direct effect
+Y_W_M <- simulated_data_mediator %>%
+  lm(Y ~ W + M, data = .)
+
+#model for mediator
+M_W <- simulated_data_mediator %>%
+  lm(M ~ W, data = .)
+
+Y_W_coef <- Y_W %>%
+  coef() %>%
+  c(., NA)
+
+Y_W_M_coef <- Y_W_M %>% 
+  coef() %>%
+  c(.)
+
+M_W_coef <- M_W %>% 
+  coef() %>%
+  c(., NA)
+
+coef_data <- as.data.frame(rbind(Y_W_coef, Y_W_M_coef, M_W_coef))
+
+names(coef_data) <- c("Intercept", "W", "M")
+rownames(coef_data) <- c("Y ~ W", "Y ~ W + M", "M ~ W")
+coef_data
+```
+
+We see that when we regress $Y$ on $W$, we get an estimate close to 11, as expected. The direct effect of $W$ on $Y$ can be obtained via the regression adjusted for $M$, which *blocks* the effect that passes through the mediator. We obtain an estimate close to 5, as expected. The effect of $W$ on $M$ is close to 2, as given by the coefficient of $W$ in the $M \sim W$ regression. The effect of $M$ on $Y$ is close to 3, as given by the $M$ coefficient in the $Y \sim W +M$ regression. Multiplying the latter two effects we obtain the indirect effect close to 6, as expected.
+
+## Conclusion
+
+Understanding these common DAG structures is crucial for accurate causal inference:
+
+- **Confounding**: Requires adjustment for common causes of treatment and outcome
+- **Collider bias**: Avoid adjusting for variables affected by both treatment and outcome
+- **Mediation**: Be clear about whether you're estimating direct, indirect, or total effects. In cases with linear models, path analysis rules can be used to quickly decompose the total effect into direct and indirect effects
+
+DAGs provide a powerful visual language for communicating causal assumptions and guiding proper statistical analysis. By understanding these common structures, researchers can better design studies, analyze data, and interpret results.
+
+If you want to receive monthly insights about Causal Inference in Statistics, please consider [subscribing to my newsletter](https://causal-inference-in-statistics.beehiiv.com/subscribe?utm_source=biostatistics&utm_medium=blog&utm_campaign=common_DAG_structures). You will receive updates about my upcoming book, blog posts, and other exclusive resources to help you learn more about causal inference in statistics. 
+
+Join the stats nerds🤓!
+
+[^1]: See [Pearl, J. (2009). Causality: Models, Reasoning, and Inference. Cambridge University Press](https://amzn.to/3Nq0RYY) for a formalization of a collider. The previous link is an affiliate link and we may earn a small commission on a purchase. I also discuss this idea in detail with examples, exercises, data, and code in my upcoming book [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks](https://justinbelair.ca/causal-inference-in-statistics-book?utm_source=biostatistics&utm_medium=blog&utm_campaign=collider_bias_footnote)
+
+[^2]: See Hernán, Hernández-Díaz, Robins (2004). A structural approach to selection bias. Epidemiology, 15(5), 615-625.
+
+[^3]: This technique is known as Path Analysis. I discuss it in detail in Part II of my upcoming book [Causal Inference in Statistics, with Exercises, Practice Projects, and R Code Notebooks](https://justinbelair.ca/causal-inference-in-statistics-book?utm_source=biostatistics&utm_medium=blog&utm_campaign=path_analysis_footnote).           
