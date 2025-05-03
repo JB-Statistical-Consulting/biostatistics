@@ -1,0 +1,93 @@
+---
+title: 
+output: pdf_document
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{amssymb}
+  - \usepackage[colorlinks=true, urlcolor=blue, allbordercolors={blue}, pdfborderstyle={/S/U/W 1}]{hyperref}
+  - \usepackage{fancyhdr}
+  - \fancypagestyle{plain}{\pagestyle{fancy}}
+  - \pagestyle{fancy}
+  - \fancyhead[LO,LE]{\href{https://justinbelair.ca/?utm_source=github&utm_medium=pdf&utm_campaign=kronecker_product}{JB Statistical Consulting}}
+  - \fancyhead[RO,RE]{\href{https://www.biostatistics.ca/?utm_source=github&utm_medium=pdf&utm_campaign=kronecker_product}{biostatistics.ca}}
+  - \renewcommand{\footrulewidth}{0.4pt}
+  - \fancyfoot[LO,LE]{Visit the biostatistics.ca \href{https://www.biostatistics.ca/github-library/?utm_source=github&utm_medium=pdf&utm_campaign=kronecker_product}{\underline{\textbf{Github Library}}} for a full collection of our FREE R Markdown code notebooks.}
+  - \fancyfoot[CO,CE]{}
+---
+
+# Kronecker Product
+
+The Kronecker product is a special operation on matrices (arrays). It is defined as follows.
+
+If $A$ is an $m \times n$ matrix and $\mathbf{B}$ is a $p \times q$ matrix, then the Kronecker product $A \otimes B$ $pm \times qn$ block matrix:
+
+$$A \otimes \mathbf{B} = \begin{bmatrix} 
+a_{11}\mathbf{B} & \cdots & a_{1n}\mathbf{B} \\ 
+\vdots & \ddots & \vdots \\ 
+a_{m1}\mathbf{B} & \cdots & a_{mn}\mathbf{B} 
+\end{bmatrix},$$
+
+where $a_{ij}$ is the $(i,j)$-th entry of $A$ and $\mathbf{B}$ is the matrix $B$. More explicitly, let's use:
+
+- $A = \begin{bmatrix} 
+1 & 2 & 3 \\ 
+4 & 5 & 6
+\end{bmatrix}$, a 2×3 matrix, and 
+$B = \begin{bmatrix} 
+1 & 2 \\ 
+3 & 4
+\end{bmatrix}$, a 2×2 matrix. Then, the Kronecker product $A \otimes B$ is computed as follows:
+
+$$A \otimes \mathbf{B} = 
+  \begin{bmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6
+  \end{bmatrix} \otimes 
+  \begin{bmatrix}
+    1 & 2 \\
+    3 & 4
+  \end{bmatrix} = \begin{bmatrix} 1
+        \begin{bmatrix}
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix} & 2
+        \begin{bmatrix} 
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix} & 3
+        \begin{bmatrix} 
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix} \\ 
+        4
+        \begin{bmatrix} 
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix} & 5
+        \begin{bmatrix} 
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix} & 6
+        \begin{bmatrix} 
+          1 & 2 \\ 3 & 4 
+        \end{bmatrix}
+    \end{bmatrix} \\
+    = \begin{bmatrix}
+          1 & 2 & 2 & 4 & 3 & 6 \\
+          3 & 4 & 6 & 8 & 9 & 12 \\
+          4 & 8 & 5 & 10 & 6 & 12 \\
+          12 & 16 & 15 & 20 & 18 & 24
+      \end{bmatrix}$$
+
+In R, this is easy to implement
+
+```{r}
+A <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)
+B <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
+A %x% B
+```
+## Kronecker Product Use-Case From My Consulting Practice
+
+Suppose I want to simulate a quasi-poisson variable based on given mean parameters $\lambda$ and $\phi$. For a quasi-poisson, the variance is equal to $\phi \cdot \lambda$. Suppose I have a matrix of means $\lambda$, that are determined by a combination of 2-variables. I also have a set of parameters $\phi$. Now, I want all the possible combinations of $\lambda \cdot phi$, i.e all the possible variances. I can create this using the Kronecker product. The matrix is given by:
+
+```{r}
+lambda <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE)
+phi <- c(3, 4)
+phi %x% lambda
+```
+Now, I can iterate over these variance parameters for my analysis.
