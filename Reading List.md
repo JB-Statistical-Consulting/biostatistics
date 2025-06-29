@@ -125,6 +125,10 @@
 - [Andy Wilson & Aimee Harrison, Crash course on confounding, bias, and deconfounding remedies using R, 2024](https://www.biostatistics.ca/crash-course-on-confounding-bias-and-deconfounding-remedies-using-r/)
 	- A great blog post about practical, hands-on methods (including R code) to remove confounding and estimate unbiased treatment effects.
 
+### Quasi-Experimental Methods
+
+- [Matias D. Cattaneo, Nicolás Idrobo and Rocío Titiunik, *A Practical Introduction to Regression Discontinuity Designs*, 2019](https://doi.org/10.1017/9781108684606)
+
 ### Propensity Score
 
 - [Peter C. Austin, An Introduction to Propensity Score Methods for Reducing the Effects of Confounding in Observational Studies, 2011](https://doi.org/10.1080%2F00273171.2011.568786)
