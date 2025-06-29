@@ -128,6 +128,7 @@
 ### Quasi-Experimental Methods
 
 - [Matias D. Cattaneo, Nicolás Idrobo and Rocío Titiunik, *A Practical Introduction to Regression Discontinuity Designs*, 2019](https://doi.org/10.1017/9781108684606)
+	- This monograph provides an accessible and practical guide for the analysis and interpretation of Regression Discontinuity (RD) designs that encourages the use of a common set of practices and facilitates the accumulation of RD-based empirical evidence - it is a great starting point to learn how to implement RD in practice.
 
 ### Propensity Score
 
